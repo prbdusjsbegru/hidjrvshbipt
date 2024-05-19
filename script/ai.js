@@ -1,14 +1,14 @@
 const axios = require('axios');
 module.exports.config = {
-  name: 'ai',
+  name: 'orochi',
   version: '1.0.0',
   role: 0,
   hasPrefix: false,
-  aliases: ['gpt', 'openai'],
+  aliases: ['chi', '.chi', '.orochi'],
   description: "An AI command powered by GPT-4",
   usage: "Ai [promot]",
   credits: 'Developer',
-  cooldown: 3,
+  cooldown: 0,
 };
 module.exports.run = async function({
   api,
@@ -16,17 +16,12 @@ module.exports.run = async function({
   args
 }) {
   const input = args.join(' ');
-  if (!input) {
-    api.sendMessage(`Please provide a question or statement after 'ai'. For example: 'ai What is the capital of France?'`, event.threadID, event.messageID);
-    return;
-  }
-  api.sendMessage(`🔍 "${input}"`, event.threadID, event.messageID);
-  try {
+try {
     const {
       data
-    } = await axios.get(`https://soyeon-api.onrender.com/api?prompt=${encodeURIComponent(input)}`);
-    const response = data.response;
-    api.sendMessage(response + '\n\nhttps://bit.ly/create-chatbot-me', event.threadID, event.messageID);
+    } = await axios.get(`https://goatbottt.onrender.com/gpt?prompt=${encodeURIComponent(input)}`);
+    const response = response.data.answer;
+    api.sendMessage(response), event.threadID, event.messageID);
   } catch (error) {
     api.sendMessage('An error occurred while processing your request.', event.threadID, event.messageID);
   }
